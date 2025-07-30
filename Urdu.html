@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mycology & Mohabbat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      background: radial-gradient(circle at center, #1e2731, #0f1215);
+      overflow-x: hidden;
+    }
+
+    .moon-scene {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.pinimg.com/736x/03/54/d8/0354d8b36a499548ab158fff18bc75a0.jpg') center/cover no-repeat;
+      z-index: -1;
+      opacity: 0.3;
+      animation: floatScene 60s linear infinite;
+    }
+
+    @keyframes floatScene {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      text-align: center;
+      margin-top: 60px;
+      color: #ffddcc;
+      animation: fadeInUp 2s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .calligraphy {
+      font-size: 2rem;
+      text-align: center;
+      margin-top: 10px;
+      color: #ffcccc;
+      font-family: 'Great Vibes', cursive;
+      animation: shimmer 5s infinite ease-in-out;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 40px 20px;
+    }
+
+    .card {
+      width: 220px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      text-decoration: none;
+      color: #ffeaea;
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: none;
+    }
+
+    .card.coming-soon:hover .tooltip {
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.85rem;
+      background-color: #111;
+      color: #aaa;
+    }
+
+    .social-links a {
+      margin: 0 10px;
+      color: #ff99aa;
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="moon-scene"></div>
+
+  <h1>Urdu</h1>
+  <div class="calligraphy"></div>
+
+  <div class="card-container">
+    <a href="https://docs.google.com/document/d/11NV08vmF9-T6s4axPIxmuksXiC_8SrdQ7l9Yz-59dhI/export?format=pdf" class="card">
+      <h2>📚 Syllabus</h2>
+    </a>
+    <a href="https://docs.google.com/document/d/1Q4yNT0c4TxgrtomJLyIvw1Ukldbq5bqGuGEUocWErmE/export?format=pdf" class="card">
+      <h2>📝 Notes</h2>
+    <a href="#" class="card coming-soon">
+      <h2>🧠 MCQ Test</h2>
+      <div class="tooltip">Coming Soon</div>
+    </a>
+    <a href="#" class="card coming-soon">
+      <h2>📄 PYQ</h2>
+      <div class="tooltip">Coming Soon</div>
+    </a>
+    <a href="#" class="card coming-soon">
+      <h2>🔥 VVI Topics</h2>
+      <div class="tooltip">Coming Soon</div>
+    </a>
+    </a>
+  </div>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://www.instagram.com/silent_batchmate" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://whatsapp.com/channel/0029VajiRmkFi8xmRZUzly0I" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="mailto:studypace.ba@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+    </div>
+    <p>All Rights Reserved</p>
+    <p>© 2025 StudyPace</p>
+  </footer>
+</body>
+</html>
