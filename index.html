@@ -216,6 +216,10 @@
             box-shadow: 0 4px 15px rgba(214, 48, 49, 0.4);
         }
 
+        .clear-btn:active {
+            transform: translateY(0);
+        }
+
         .courses-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -460,6 +464,25 @@
                 }
             ];
 
+            // --- NEW: Centralized List of AVAILABLE HTML Subject Pages ---
+            // Update this list ONLY when you create/delete a subject's dedicated HTML page.
+            // Ensure subject names match exactly what's in data-subject attributes or select options.
+            const availableSubjectPages = [
+                "MJC-1 History",
+                "MJC-1 Political Science",
+                "MJC-1 Economics",
+                "MIC-1 Hindi",
+                // Add all other subjects for which you have corresponding HTML files (e.g., MJC-1_History.html)
+                // Examples from your provided list that MIGHT have pages:
+                "AEC-1", "AEC-2", "AEC-3", "AEC-4",
+                "INT-1",
+                "MDC-1", "MDC-2", "MDC-3",
+                "MIC-1", "MIC-2", "MIC-3", "MIC-4", "MIC-5", "MIC-6", "MIC-7", "MIC-8", "MIC-9", "MIC-10",
+                "MJC-1", "MJC-2", "MJC-3", "MJC-4", "MJC-5", "MJC-6", "MJC-7", "MJC-8", "MJC-9", "MJC-10", "MJC-11", "MJC-12", "MJC-13", "MJC-14", "MJC-15", "MJC-16",
+                "SEC-1", "SEC-2", "SEC-3",
+                // REMEMBER: Only add subjects here if their HTML file exists.
+            ].map(subject => subject.toLowerCase()); // Convert to lowercase for case-insensitive check
+
             function sanitizeInput(input) {
                 const div = document.createElement('div');
                 div.textContent = input;
@@ -571,11 +594,24 @@
                                 btn.textContent = `Open ${subject} Page`;
                                 btn.dataset.subject = subject;
                                 
+                                // --- MODIFIED: Subject Button Click Logic ---
                                 btn.addEventListener('click', function() {
-                                    const subjectName = this.dataset.subject;
-                                    const fileName = subjectName.replace(/ /g, '_') + '.html';
-                                    window.location.href = fileName;
+                                    const subjectName = this.dataset.subject; // e.g., "MJC-1 History"
+                                    const lowerCaseSubjectName = subjectName.toLowerCase();
+
+                                    // Check if the subject's page is available in our centralized list
+                                    if (availableSubjectPages.includes(lowerCaseSubjectName)) {
+                                        // If available, redirect to the subject's HTML page
+                                        const fileName = subjectName.replace(/ /g, '_') + '.html';
+                                        window.location.href = fileName;
+                                    } else {
+                                        // If NOT available, redirect to the Subject Request Form
+                                        // Pass the requested subject name as a URL parameter
+                                        const redirectToFormUrl = `subject_request_form.html?requestedSubject=${encodeURIComponent(subjectName)}`;
+                                        window.location.href = redirectToFormUrl;
+                                    }
                                 });
+                                // --- END MODIFIED ---
                                 
                                 this.parentNode.appendChild(btn);
                                 btn.style.opacity = '0';
@@ -595,11 +631,20 @@
                     
                     const existingBtn = card.querySelector('.subject-btn');
                     if (existingBtn) {
+                        // --- MODIFIED: Existing Subject Button Click Logic ---
                         existingBtn.addEventListener('click', function() {
                             const subjectName = this.dataset.subject;
-                            const fileName = subjectName.replace(/ /g, '_') + '.html';
-                            window.location.href = fileName;
+                            const lowerCaseSubjectName = subjectName.toLowerCase();
+
+                            if (availableSubjectPages.includes(lowerCaseSubjectName)) {
+                                const fileName = subjectName.replace(/ /g, '_') + '.html';
+                                window.location.href = fileName;
+                            } else {
+                                const redirectToFormUrl = `subject_request_form.html?requestedSubject=${encodeURIComponent(subjectName)}`;
+                                window.location.href = redirectToFormUrl;
+                            }
                         });
+                        // --- END MODIFIED ---
                     }
                 });
             }
@@ -622,4 +667,3 @@
     </script>
 </body>
 </html>
-
