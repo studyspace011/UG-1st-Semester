@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* --- General Variables and Reset --- */
         :root {
             --primary: #6c5ce7;
             --secondary: #a29bfe;
@@ -18,6 +19,8 @@
             --light: #f5f6fa;
             --glass: rgba(255, 255, 255, 0.15);
             --glass-border: rgba(255, 255, 255, 0.2);
+            --success: #00b894;
+            --danger: #d63031;
         }
 
         * {
@@ -39,7 +42,7 @@
             overflow-x: hidden;
         }
 
-        /* Welcome Screen and Form Styling */
+        /* --- Welcome Screen and Form Styling --- */
         .welcome-screen {
             display: flex;
             flex-direction: column;
@@ -173,7 +176,7 @@
             transform: translateY(0);
         }
 
-        /* Main Content and Course Cards Styling */
+        /* --- Main Content and Course Cards Styling --- */
         .main-content {
             display: none;
             width: 100%;
@@ -199,25 +202,61 @@
             font-size: 1.1rem;
             opacity: 0.9;
         }
-
+        
         .clear-btn {
             display: block;
-            margin: 20px auto;
+            margin: 20px auto 10px;
             padding: 10px 25px;
             border-radius: 50px;
             border: none;
-            background: #e17055;
+            background: var(--danger);
             color: white;
             font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(214, 48, 49, 0.4);
         }
 
         .clear-btn:hover {
-            background: #d63031;
+            background: #c0392b;
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(214, 48, 49, 0.4);
+            box-shadow: 0 4px 15px rgba(214, 48, 49, 0.6);
+        }
+
+        /* Added new semester navigation styles */
+        .semester-navigation {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            padding: 15px;
+            background: var(--glass);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .semester-navigation p {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .semester-navigation a {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .semester-navigation a:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: scale(1.05);
         }
 
         .courses-grid {
@@ -239,9 +278,14 @@
             animation: fadeInScale 0.5s ease-out forwards;
             animation-delay: calc(0.1s * var(--index));
         }
+        /* New style for visited cards */
+        .course-card.visited {
+            border: 2px solid var(--success);
+            box-shadow: 0 8px 32px rgba(0, 184, 148, 0.4);
+        }
 
         .course-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.02);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
         }
 
@@ -285,7 +329,7 @@
             font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
-            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            transition: all 0.3s ease;
             margin-top: 10px;
         }
 
@@ -296,7 +340,7 @@
             box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
         }
 
-        /* Animations */
+        /* --- Animations --- */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -319,7 +363,7 @@
             }
         }
 
-        /* Responsive Design */
+        /* --- Responsive Design --- */
         @media (max-width: 900px) {
             .courses-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -368,14 +412,14 @@
     <div class="welcome-screen" id="welcomeScreen">
         <h1>Welcome to Study Space</h1>
         <h2>
-            This website is made by your senior <strong>Aliya</strong> (Session 24-28), not just as a project — but as a personal gesture for all juniors stepping into the world of college.
+            This website is made by your senior <strong>Silent Batchmate</strong> (Session 24-28), not just as a project — but as a personal gesture for all juniors stepping into the world of college.
             <br><br>
             I know how confusing and overwhelming the <strong>1st Semester</strong> can be — I’ve been there too. That’s exactly why I created this space: 
             <strong>so you don’t face the same struggles I did.</strong>
             <br><br>
             Here, you’ll find all the important study materials for the 1st Semester — neatly organized and absolutely free.
-            If you have any questions, you can ask me on my insta 
-            <a href="https://instagram.com/itz_aliya._011" target="_blank">@itz._aliya_011</a>.
+            If you have any questions, you can ask me on my insta
+            <a href="https://instagram.com/silent_batchmate" target="_blank">@Silent_Batchmate</a>.
             <br><br>
             <span>Not in <strong>1st Semester?</strong> Choose your semester:</span>
             <div class="semester-links">
@@ -383,7 +427,7 @@
                 <a href="https://studyspace011.github.io/UG-3rd-Semester/">3rd Semester</a>
             </div>
         </h2>
-        <form id="contactForm" onsubmit="return postToGoogle(event);">
+        <form id="contactForm">
             <div class="input-group">
                 <label for="name">Your Name</label>
                 <input type="text" id="name" name="entry.668301457" placeholder="Your name here..." required>
@@ -416,14 +460,20 @@
         </form>
     </div>
 
-    <div class="main-content" id="mainContent">
+    <main class="main-content" id="mainContent">
         <div class="greeting">
             <h2 id="greetingText">Hello, User!</h2>
             <p>Choose your courses below:</p>
         </div>
         <div class="courses-grid" id="coursesGrid"></div>
         <button class="clear-btn" id="clearBtn">Clear All Selected Subjects</button>
-    </div>
+
+        <div class="semester-navigation">
+            <p>Switch to a different semester:</p>
+            <a href="https://studyspace011.github.io/UG-2nd-Semester/">2nd Semester</a>
+            <a href="https://studyspace011.github.io/UG-3rd-Semester/">3rd Semester</a>
+        </div>
+    </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -435,36 +485,12 @@
             const contactForm = document.getElementById('contactForm');
 
             const courses = [
-                {
-                    id: 'mjc',
-                    name: 'MJC',
-                    subjects: ['Pol-Sci', 'History', 'Economics', 'English', 'Hindi', 'Urdu', 'Philosophy', 'Sociology', 'Psychology', 'Zoology', 'Chemistry', 'Physics', 'Mathematics', 'Botany']
-                },
-                {
-                    id: 'mic',
-                    name: 'MIC',
-                    subjects: ['MIC-History', 'MIC-Pol-sci', 'MIC-Urdu', 'MIC-Economics', 'MIC-Hindi', 'MIC-English', 'MIC-Geography', 'MIC-Philosophy', 'MIC-Zoology', 'MIC-Chemistry', 'MIC-Physics', 'MIC-Botany']
-                },
-                {
-                    id: 'mdc',
-                    name: 'MDC',
-                    subjects: ['MDC-History', 'MDC-Pol-sci', 'MIC-Urdu', 'MDC-Economics', 'MDC-Hindi', 'MDC-English', 'MDC-Geography', 'MDC-Philosophy', 'MDC-Zoology', 'MDC-Chemistry', 'MDC-Physics', 'MDC-Botany']
-                },
-                {
-                    id: 'sec',
-                    name: 'SEC',
-                    subjects: ['Communication-in-Everyday-Life']
-                },
-                {
-                    id: 'aec',
-                    name: 'AEC',
-                    subjects: ['MIL-English-Communication', 'MIL-Hindi']
-                },
-                {
-                    id: 'vac',
-                    name: 'VAC',
-                    subjects: [' Swachh-Bharat']
-                }
+                { id: 'mjc', name: 'MJC', subjects: ['Pol-Sci', 'History', 'Economics', 'English', 'Hindi', 'Urdu', 'Philosophy', 'Sociology', 'Psychology', 'Zoology', 'Chemistry', 'Physics', 'Mathematics', 'Botany'] },
+                { id: 'mic', name: 'MIC', subjects: ['MIC-History', 'MIC-Pol-sci', 'MIC-Urdu', 'MIC-Economics', 'MIC-Hindi', 'MIC-English', 'MIC-Geography', 'MIC-Philosophy', 'MIC-Zoology', 'MIC-Chemistry', 'MIC-Physics', 'MIC-Botany'] },
+                { id: 'mdc', name: 'MDC', subjects: ['MDC-History', 'MDC-Pol-sci', 'MIC-Urdu', 'MDC-Economics', 'MDC-Hindi', 'MDC-English', 'MDC-Geography', 'MDC-Philosophy', 'MDC-Zoology', 'MDC-Chemistry', 'MDC-Physics', 'MDC-Botany'] },
+                { id: 'sec', name: 'SEC', subjects: ['Communication-in-Everyday-Life'] },
+                { id: 'aec', name: 'AEC', subjects: ['MIL-English-Communication', 'MIL-Hindi'] },
+                { id: 'vac', name: 'VAC', subjects: [' Swachh-Bharat'] }
             ];
 
             function sanitizeInput(input) {
@@ -473,7 +499,7 @@
                 return div.innerHTML;
             }
 
-            // Check if user has a saved name and roll number in local storage
+            // Check if user has saved data in local storage
             const savedName = localStorage.getItem('userName');
             const savedRollNo = localStorage.getItem('userRollNo');
             if (savedName && savedRollNo) {
@@ -481,6 +507,9 @@
                 mainContent.style.display = 'block';
                 greetingText.textContent = `Hello, ${sanitizeInput(savedName)}!`;
                 generateCourseCards();
+            } else {
+                welcomeScreen.style.display = 'flex';
+                mainContent.style.display = 'none';
             }
 
             // Function to post form data to Google Sheet
@@ -502,13 +531,6 @@
                     return false;
                 }
 
-                const existingRollNos = JSON.parse(localStorage.getItem('rollNos') || '[]');
-                if (existingRollNos.includes(rollNo)) {
-                    alert("This roll number is already registered. Please use a different one.");
-                    document.getElementById('rollNo').focus();
-                    return false;
-                }
-
                 const formData = new FormData();
                 formData.append("entry.668301457", name);
                 formData.append("entry.719129946", department);
@@ -520,8 +542,6 @@
                     body: formData
                 })
                 .then(() => {
-                    existingRollNos.push(rollNo);
-                    localStorage.setItem('rollNos', JSON.stringify(existingRollNos));
                     localStorage.setItem("userName", name);
                     localStorage.setItem("userRollNo", rollNo);
 
@@ -543,81 +563,84 @@
             // Function to dynamically generate course cards
             function generateCourseCards() {
                 coursesGrid.innerHTML = '';
+                const visitedSubjects = JSON.parse(localStorage.getItem('visitedSubjects')) || [];
 
                 courses.forEach((course, index) => {
+                    const savedSubject = localStorage.getItem(course.id);
+                    const isVisited = savedSubject && visitedSubjects.includes(savedSubject);
+
                     const card = document.createElement('div');
-                    card.className = 'course-card';
+                    card.className = `course-card ${isVisited ? 'visited' : ''}`;
                     card.style.setProperty('--index', index);
 
-                    const savedSubject = localStorage.getItem(course.id);
-
-                    card.innerHTML = `
-                        <h3>${course.name}</h3>
+                    const selectHtml = `
                         <select class="course-select" id="${course.id}-select" ${savedSubject ? 'disabled' : ''}>
                             <option value="" disabled ${!savedSubject ? 'selected' : ''}>Select a subject</option>
                             ${course.subjects.map(subject =>
                                 `<option value="${subject}" ${savedSubject === subject ? 'selected' : ''}>${subject}</option>`
                             ).join('')}
                         </select>
-                        ${savedSubject ? `<button class="subject-btn" data-subject="${savedSubject}">Open ${savedSubject} Page</button>` : ''}
+                    `;
+
+                    const buttonHtml = savedSubject 
+                        ? `<button class="subject-btn" data-subject="${savedSubject}">Open ${savedSubject} Page</button>` 
+                        : '';
+
+                    card.innerHTML = `
+                        <h3>${course.name}</h3>
+                        ${selectHtml}
+                        ${buttonHtml}
                     `;
 
                     coursesGrid.appendChild(card);
 
+                    // Add event listener for new subject selection
                     const select = card.querySelector(`#${course.id}-select`);
-                    select.addEventListener('change', function() {
-                        const subject = this.value;
-                        if (subject) {
-                            try {
-                                localStorage.setItem(course.id, subject);
-                                this.disabled = true;
-
-                                const btn = document.createElement('button');
-                                btn.className = 'subject-btn';
-                                btn.textContent = `Open ${subject} Page`;
-                                btn.dataset.subject = subject;
-
-                                btn.addEventListener('click', function() {
-                                    const subjectName = this.dataset.subject;
-                                    const fileName = subjectName.replace(/ /g, '_') + '.html';
-                                    window.location.href = fileName;
-                                });
-
-                                this.parentNode.appendChild(btn);
-                                btn.style.opacity = '0';
-                                btn.style.transform = 'translateY(10px)';
-                                btn.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
-
-                                requestAnimationFrame(() => {
-                                    btn.style.opacity = '1';
-                                    btn.style.transform = 'translateY(0)';
-                                });
-                            } catch (e) {
-                                console.error('Error in subject selection:', e);
-                                alert('An error occurred while selecting the subject.');
+                    if (select) {
+                        select.addEventListener('change', function() {
+                            const subject = this.value;
+                            if (subject) {
+                                try {
+                                    localStorage.setItem(course.id, subject);
+                                    this.disabled = true;
+                                    generateCourseCards(); // Re-render to show the new button
+                                } catch (e) {
+                                    console.error('Error in subject selection:', e);
+                                    alert('An error occurred while selecting the subject.');
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
 
+                    // Add event listener for existing buttons
                     const existingBtn = card.querySelector('.subject-btn');
                     if (existingBtn) {
                         existingBtn.addEventListener('click', function() {
                             const subjectName = this.dataset.subject;
-                            const fileName = subjectName.replace(/ /g, '_') + '.html';
+                            const fileName = subjectName.replace(/ /g, '-') + '.html';
+                            
+                            // Add to visited subjects
+                            const visited = JSON.parse(localStorage.getItem('visitedSubjects')) || [];
+                            if (!visited.includes(subjectName)) {
+                                visited.push(subjectName);
+                                localStorage.setItem('visitedSubjects', JSON.stringify(visited));
+                            }
+                            
                             window.location.href = fileName;
                         });
                     }
                 });
             }
 
-            // Clear all selected subjects from local storage
+            // Clear all selected subjects from local storage and refresh UI
             clearBtn.addEventListener('click', function() {
                 if (confirm('Are you sure you want to clear all selected subjects?')) {
                     try {
                         courses.forEach(course => {
                             localStorage.removeItem(course.id);
                         });
-                        generateCourseCards();
+                        localStorage.removeItem('visitedSubjects'); // Clear visited state as well
+                        generateCourseCards(); // Re-render the cards
                     } catch (e) {
                         console.error('Error clearing selections:', e);
                         alert('An error occurred while clearing selections.');
